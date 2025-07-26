@@ -5,7 +5,7 @@ import os
 
 if "agreed" not in st.session_state:
     st.session_state.agreed = False
-@st.dialog("Cast Ur Vote")
+@st.dialog("Terms and Conditions")
 def show_terms():
     st.write("""
     **Syarat & Ketentuan:**
@@ -64,8 +64,11 @@ if user_input:
         }
         response = requests.post(API_URL, headers=HEADERS, json=payload)
 
+
     if response.status_code == 200:
         bot_reply = response.json()['choices'][0]['message']['content']
+    elif api == "":
+        bot_reply ="⚠️ Tolong Masukkan API OpenRouter nya !"
     else:
         bot_reply = "⚠️ Maaf, gagal mengambil respons dari OpenRouter."
 
