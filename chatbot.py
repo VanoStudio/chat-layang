@@ -3,22 +3,24 @@ import requests
 import tomllib
 import os
 
-config_path = os.path.join(os.path.dirname(__file__), '.streamlit', 'secrets.toml')
 
-with open(config_path, "rb") as f:
-    config = tomllib.load(f)
 
-api_key = config['OPENROUTER_API_KEY']
-MODEL = "tngtech/deepseek-r1t2-chimera:free"
+with st.sidebar:
+    MODEL = ["tngtech/deepseek-r1t2-chimera:free", "mistralai/devstral-small-2505:free"]
+    api = st.text_input("Masukkan API OpenRouter","")
+    modelai = st.selectbox(
+        "Kamu ingin menggunakan model apa ?",MODEL
+    )
+
 HEADERS = {
-    "Authorization": f"Bearer {api_key}",
+    "Authorization": f"Bearer {api}",
     "HTTP-Referer": "http://localhost:8501",
     "X-Title": "AI Chatbot Streamlit"
 }
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 st.title("primaye")
-st.markdown(f"Powered by {MODEL} via OpenRouter 🤖")
+st.markdown(f"Powered by {modelai} via OpenRouter 🤖")
 
 # ✅ Inisialisasi session state
 if "chat_history" not in st.session_state:
@@ -37,7 +39,7 @@ if user_input:
 
     with st.spinner("Mengetik..."):
         payload = {
-            "model": MODEL,
+            "model": modelai,
             "messages": [
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": user_input}
