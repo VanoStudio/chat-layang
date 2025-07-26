@@ -68,7 +68,7 @@ if user_input:
     if response.status_code == 200:
         bot_reply = response.json()['choices'][0]['message']['content']
     elif api == "":
-        bot_reply ="⚠️ Tolong Masukkan API OpenRouter nya !"
+        bot_reply ="‼️ Tolong Masukkan API OpenRouter nya !"
     else:
         bot_reply = "⚠️ Maaf, gagal mengambil respons dari OpenRouter."
 
