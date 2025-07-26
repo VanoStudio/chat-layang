@@ -3,14 +3,31 @@ import requests
 import tomllib
 import os
 
+if "agreed" not in st.session_state:
+    st.session_state.agreed = False
+@st.dialog("Cast Ur Vote")
+def show_terms():
+    st.write("""
+    **Syarat & Ketentuan:**
+    1. Data akan digunakan untuk pengembangan aplikasi.
+    2. Aplikasi tidak menyimpan data pribadi secara permanen.
+    3. Dengan melanjutkan, kamu setuju mengikuti aturan yang berlaku.
+    """)
 
+    if st.button("✅ Saya Setuju"):
+        st.session_state.agreed = True
+        st.rerun()
+
+if not st.session_state.agreed:
+    show_terms()
 
 with st.sidebar:
-    MODEL = ["tngtech/deepseek-r1t2-chimera:free", "mistralai/devstral-small-2505:free"]
+    MODEL = ["tngtech/deepseek-r1t2-chimera:free", "mistralai/devstral-small-2505:free", ]
     api = st.text_input("Masukkan API OpenRouter","")
     modelai = st.selectbox(
         "Kamu ingin menggunakan model apa ?",MODEL
     )
+
 
 HEADERS = {
     "Authorization": f"Bearer {api}",
