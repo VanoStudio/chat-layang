@@ -92,7 +92,39 @@ import tomllib
 import os
 ```
 ### 🔹 Session State Initialization
+```python
+if "agreed" not in st.session_state:
+    st.session_state.agreed = False
+```
+### 🔹 Terms & Conditions Dialog
+```python
+@st.dialog("Terms and Conditions")
+def show_terms():
+    st.write("""
+    **Syarat & Ketentuan:**
+    1. Data akan digunakan untuk pengembangan aplikasi.
+    2. Aplikasi tidak menyimpan data pribadi secara permanen.
+    3. Dengan melanjutkan, kamu setuju mengikuti aturan yang berlaku.
+    """)
 
+    if st.button("✅ Saya Setuju"):
+        st.session_state.agreed = True
+        st.rerun()
+```
+### 🔹 Sidebar UI
+```python
+with st.sidebar:
+    MODEL = ["tngtech/deepseek-r1t2-chimera:free", "mistralai/devstral-small-2505:free", ]
+    api = st.text_input("Masukkan API OpenRouter","")
+    st.session_state.api = api
+    modelai = st.selectbox(
+        "Kamu ingin menggunakan model apa ?",MODEL
+    )
+    if st.button("🗑️ Hapus Chat"):
+        st.session_state.chat_history = []
+        st.rerun()
+
+```
 ## License
 
 MIT License
