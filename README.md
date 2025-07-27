@@ -1,6 +1,8 @@
 # primaye - Streamlit AI Chatbot
 
 primaye is a simple chatbot web application built with [Streamlit](https://streamlit.io/) that connects to OpenRouter AI models. It allows users to chat with an AI assistant using their own OpenRouter API key.
+Link Website:
+https://chat-layang-9aqhymqnbaqwzragchibuy.streamlit.app/
 
 ---
 
@@ -89,6 +91,7 @@ import requests
 import tomllib
 import os
 ```
+### 🔹 Session State Initialization
 
 ## License
 
