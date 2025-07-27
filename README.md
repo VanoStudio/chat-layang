@@ -125,6 +125,22 @@ with st.sidebar:
         st.rerun()
 
 ```
+### 🔹 API Headers
+```python
+HEADERS = {
+    "Authorization": f"Bearer {st.session_state.get('api','')}",
+    "HTTP-Referer": "https://chat-layang-9aqhymqnbaqwzragchibuy.streamlit.app/",
+    "X-Title": "AI Chatbot Streamlit"
+}
+API_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+```
+### 🔹 Main UI
+```python
+st.title("primaye")
+st.markdown(f"Powered by {modelai} via OpenRouter 🤖")
+
+```
 ## License
 
 MIT License
