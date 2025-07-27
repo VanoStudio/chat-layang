@@ -141,6 +141,59 @@ st.title("primaye")
 st.markdown(f"Powered by {modelai} via OpenRouter 🤖")
 
 ```
+### 🔹 Chat History Initialization
+```python
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = []
+
+```
+### 🔹 Display Chat History
+```python
+for chat in st.session_state.chat_history:
+    with st.chat_message(chat["role"]):
+        st.markdown(chat["content"])
+
+```
+### 🔹 User Input
+```python
+user_input = st.chat_input("Tulis pesan di sini...")
+if user_input:
+    st.chat_message("user").markdown(user_input)
+    st.session_state.chat_history.append({"role": "user", "content": user_input})
+
+```
+
+### 🔹 Send to API & Get Response
+```python
+    with st.spinner("Mengetik..."):
+        payload = {
+            "model": modelai,
+            "messages": [
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": user_input}
+            ]
+        }
+        response = requests.post(API_URL, headers=HEADERS, json=payload)
+
+```
+### 🔹 Handle API Response
+```python
+    if response.status_code == 200:
+        bot_reply = response.json()['choices'][0]['message']['content']
+    elif api == "":
+        bot_reply ="‼️ Tolong Masukkan API OpenRouter nya !"
+    elif response.status_code == 401:
+        bot_reply = "‼️ Tolong Masukkan API OpenRouter yang valid"
+    else:
+        bot_reply = f"⚠️ Maaf, gagal mengambil respons dari OpenRouter.({response.status_code})"
+
+```
+### 🔹 Display AI Response
+```python
+    st.chat_message("assistant").markdown(bot_reply)
+    st.session_state.chat_history.append({"role": "assistant", "content": bot_reply})
+
+```
 ## License
 
 MIT License
