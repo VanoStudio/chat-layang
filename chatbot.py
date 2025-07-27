@@ -27,6 +27,9 @@ with st.sidebar:
     modelai = st.selectbox(
         "Kamu ingin menggunakan model apa ?",MODEL
     )
+    if st.button("🗑️ Hapus Chat"):
+        st.session_state.chat_history = []
+        st.rerun()
 
 
 HEADERS = {
@@ -70,7 +73,7 @@ if user_input:
     elif api == "":
         bot_reply ="‼️ Tolong Masukkan API OpenRouter nya !"
     else:
-        bot_reply = "⚠️ Maaf, gagal mengambil respons dari OpenRouter."
+        bot_reply = "⚠️ Maaf, gagal mengambil respons dari OpenRouter.({response.status_code})"
 
     st.chat_message("assistant").markdown(bot_reply)
     st.session_state.chat_history.append({"role": "assistant", "content": bot_reply})
