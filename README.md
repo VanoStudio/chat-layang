@@ -202,6 +202,6 @@ MIT License
 ---
 
 ## Credits
-
 - Built with [Streamlit](https://streamlit.io/)
-- Uses
+- Uses [OpenRouter](https://openrouter.ai/) for AI models
+- Created by [VanoStudio](https://github.com/VanoStudio)
