@@ -72,8 +72,10 @@ if user_input:
         bot_reply = response.json()['choices'][0]['message']['content']
     elif api == "":
         bot_reply ="‼️ Tolong Masukkan API OpenRouter nya !"
+    elif response.status_code == 401:
+        bot_reply = "‼️ Tolong Masukkan API OpenRouter yang valid"
     else:
-        bot_reply = "⚠️ Maaf, gagal mengambil respons dari OpenRouter.({response.status_code})"
+        bot_reply = f"⚠️ Maaf, gagal mengambil respons dari OpenRouter.({response.status_code})"
 
     st.chat_message("assistant").markdown(bot_reply)
     st.session_state.chat_history.append({"role": "assistant", "content": bot_reply})
