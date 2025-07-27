@@ -81,6 +81,15 @@ primaye is a simple chatbot web application built with [Streamlit](https://strea
 
 ---
 
+## 📌 Code Documentation
+### 🔹 Imports
+```python
+import streamlit as st
+import requests
+import tomllib
+import os
+```
+
 ## License
 
 MIT License
