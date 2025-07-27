@@ -24,6 +24,7 @@ if not st.session_state.agreed:
 with st.sidebar:
     MODEL = ["tngtech/deepseek-r1t2-chimera:free", "mistralai/devstral-small-2505:free", ]
     api = st.text_input("Masukkan API OpenRouter","")
+    st.session_state.api = api
     modelai = st.selectbox(
         "Kamu ingin menggunakan model apa ?",MODEL
     )
@@ -33,7 +34,7 @@ with st.sidebar:
 
 
 HEADERS = {
-    "Authorization": f"Bearer {api}",
+    "Authorization": f"Bearer {st.session_state.get('api','')}",
     "HTTP-Referer": "http://localhost:8501",
     "X-Title": "AI Chatbot Streamlit"
 }
