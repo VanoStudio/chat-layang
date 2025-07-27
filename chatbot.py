@@ -35,7 +35,7 @@ with st.sidebar:
 
 HEADERS = {
     "Authorization": f"Bearer {st.session_state.get('api','')}",
-    "HTTP-Referer": "http://localhost:8501",
+    "HTTP-Referer": "https://chat-layang-9aqhymqnbaqwzragchibuy.streamlit.app/",
     "X-Title": "AI Chatbot Streamlit"
 }
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
